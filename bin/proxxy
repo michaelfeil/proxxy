@@ -110,6 +110,8 @@ EventMachine.run do
       raise url.scheme
     end
     begin
+      # log to console the host, port and path, depending on the scheme
+      puts "proxy listening on #{url.host || url.path}:#{url.port}, handler: #{handler}"
       EventMachine.start_server(url.host || url.path, url.port, handler, opts)
     rescue RuntimeError => e
       EventMachine.stop
